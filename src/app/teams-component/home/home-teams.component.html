@@ -1,0 +1,36 @@
+<div class="page-container">
+  <h1>Recherche de championnat</h1>
+  <form [formGroup]="searchForm" (ngSubmit)="searchTeams()">
+    <div class="input-container">
+      <input type="text" formControlName="leagueName" placeholder="Entrez le nom du championnat">
+      <ul *ngIf="showSuggestion">
+        <li *ngFor="let league of filteredLeagues" (click)="getLeagueDetails(league.strLeague)">
+          <span >{{ league.strLeague }}</span>
+        </li>
+      </ul>
+      <button class="clear-button" type="button" (click)="clearInput()">X</button>
+    </div>
+        <button [ngClass]="{ 'disabled-button': searchForm.get('leagueName')?.value === initialLeagueName }"
+        type="submit" [disabled]="searchForm.get('leagueName')?.value === initialLeagueName">Rechercher</button>
+  </form>
+
+  <h2>Équipes</h2>
+  <div class="team-images">
+    <ng-container *ngIf="teams$ | async as teams">
+      <div class="team-image-container" *ngFor="let team of teams" (click)="navigateToTeamDetail(team.strTeam)">
+        <img [src]="team.strTeamBadge" alt="{{ team.strTeam }}">
+        <div class="additional-info">
+          <div class="team-details">
+          <h4 class="desktop-only">{{ team.strTeam }}</h4>
+          <p class="desktop-only">{{ team.strCountry }}</p>
+        </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <button class="scroll-up-button" (click)="scrollToTop()" *ngIf="showScrollButton">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 19V5M5 12l7-7 7 7"/>
+    </svg>
+  </button>
+</div>

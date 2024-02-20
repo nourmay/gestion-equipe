@@ -1,0 +1,30 @@
+<div class="page-container">
+
+  <div *ngIf="team" class="team-details">
+    <button class="back-button">
+      <div class="button-content" (click)="goBack()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
+        <span>Retour</span>
+      </div>
+    </button>
+
+        <div class="team-info">
+      <h3 class="team-title">{{ team.strTeam }}</h3>
+      <div class="image-container">
+        <img class="team-badge" [src]="team.strTeamBanner" alt="{{ team.strTeam }}">
+      </div>
+      <div class="description">
+        <p><strong>Pays :</strong> {{ team.strCountry }}</p>
+        <p><strong>Championnat :</strong> {{ team.strLeague }}</p>
+        <p><strong>Description :</strong> {{ team.strDescriptionFR }}</p>
+      </div>
+    </div>
+  </div>
+  <button class="scroll-up-button" (click)="scrollToTop()" *ngIf="showScrollButton">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 19V5M5 12l7-7 7 7"/>
+    </svg>
+  </button>
+</div>
